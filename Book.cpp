@@ -2,6 +2,7 @@
     Book class implementation
     10/11/24
     J Seger
+    Edited 11/6 for different comparisons
 */
 
 #include "Book.h"
