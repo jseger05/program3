@@ -7,6 +7,8 @@
 
 #include "Book.h"
 
+CompareBy Book::thing = CompareBy::AuthorFront; //default comparison
+
 Book::Book(){
     title = "Title";
     author = "Author";

@@ -14,7 +14,7 @@ using namespace std;
 // and passes it to the insert function.                   *
 //**********************************************************
 
-void BinaryTree::insertNode(Book& num)
+void BinaryTree::insertNode(Book const& num)
 {
    TreeNode *newNode = NULL;	// Pointer to a new node.
 

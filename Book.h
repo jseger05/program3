@@ -25,8 +25,10 @@ class Book{
         std::string title;
         std::string author;
         int year;
-        static CompareBy thing;
     public:
+        //Comparison option
+        static CompareBy thing;
+
         //constructors
         Book();
         Book(std::string, std::string, int);

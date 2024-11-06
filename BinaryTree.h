@@ -39,7 +39,7 @@ class BinaryTree
 		~BinaryTree()	// Destructor
 		{ destroySubTree(root); }
 
-		void insertNode(Book&);
+		void insertNode(Book const&);
 		bool searchNode(Book&);
 		void remove(Book&);
 
