@@ -1,0 +1,21 @@
+Program 3 planning
+
+Driver.cpp
+Tree class -- normal BST
+Data class -- reuse Books
+
+Conceit here is that we could implement the resorting 
+by title, author f/l name, and publish date
+
+To do this, could:
+- Create 4 trees out of the same nodes and give 
+    each node a bunch of ptr options
+- Use one tree and build a new one/ discard old each
+    resort. (Hopefully this could help rebalance)
+
+Also could implement rebalancing. Would be convenient, 
+but tricky to figure out.
+
+Implement file save/ upload so can work with more books.
+Build list based on popular works in 20th century or something
+
