@@ -99,7 +99,12 @@ void addBook(BinaryTree& library){
     library.insertNode(Book(title, author, year));
 }
 void editBook(BinaryTree& library){
-    std::cout << "4";
+    std::string bookToEdit;
+    std::cout << "\nWhich book would you like to edit?";
+    std::cin.ignore();
+    getline(std::cin, bookToEdit);
+    //To search, must modify display function to have indiices. Cannot search without a book reference
+    //This also lets us use inpver instead of the custom getline
 }
 void removeBook(BinaryTree& library){
     std::cout << "5";
