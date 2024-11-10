@@ -10,7 +10,7 @@ void importFile(std::string, BinaryTree&); //imports books in order from file
 void exportFile(std::string, BinaryTree&); //saves books in new order to file
 void inpVer(int& out, int lowerBound, int upperBound, std::string qText = "Enter choice:   ", std::string invText = "Input invalid.");
 void addBook(BinaryTree&);
-void editBook(BinaryTree&);
+//void editBook(BinaryTree&);
 void removeBook(BinaryTree&);
 void reSort(BinaryTree&);
 
@@ -31,19 +31,17 @@ int main(){
 
         std::cout << "\n\nWhat would you like to do?";
         std::cout << "\n\t1. Add book";
-        std::cout << "\n\t2. Edit book";
-        std::cout << "\n\t3. Remove book";
-        std::cout << "\n\t4. Re-sort list";
-        std::cout << "\n\t5. Save and exit program";
+        std::cout << "\n\t2. Remove book";
+        std::cout << "\n\t3. Re-sort list";
+        std::cout << "\n\t4. Save and exit program";
 
         inpVer(choice, 1, 5);
 
         switch(choice){
             case 1: addBook(library); break;
-            case 2: editBook(library); break;
-            case 3: removeBook(library); break;
-            case 4: reSort(library); break;
-            case 5: exportFile(outFilename, library); done = true; break;
+            case 2: removeBook(library); break;
+            case 3: reSort(library); break;
+            case 4: exportFile(outFilename, library); done = true; break;
             default: break;
         }
     }
@@ -98,16 +96,22 @@ void addBook(BinaryTree& library){
 
     library.insertNode(Book(title, author, year));
 }
-void editBook(BinaryTree& library){
+/*void editBook(BinaryTree& library){
     std::string bookToEdit;
-    std::cout << "\nWhich book would you like to edit?";
-    std::cin.ignore();
-    getline(std::cin, bookToEdit);
-    //To search, must modify display function to have indiices. Cannot search without a book reference
-    //This also lets us use inpver instead of the custom getline
-}
+    std::cout << "\nWhich book would you like to edit? (index)";
+    int editChoice;
+    inpVer(editChoice, 1, library.getTreeSize());
+    std::cout << "What would you like to change? Title (1), Author (2), or Year(3)";
+    int attChoice;
+    inpVer(attChoice, 1, 3);
+
+}*/
 void removeBook(BinaryTree& library){
-    std::cout << "5";
+    std::string bookToRemove;
+    std::cout << "\nWhich book would you like to remove? (index)";
+    int removeChoice;
+    inpVer(removeChoice, 1, library.getTreeSize());
+    library.remove((library.searchNodebyIndex(removeChoice))->value);
 }
 void reSort(BinaryTree& library){
     std::cout << "6";

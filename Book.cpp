@@ -13,12 +13,14 @@ Book::Book(){
     title = "Title";
     author = "Author";
     year = 1900;
+    index = -1;
 }
 
 Book::Book(std::string t, std::string a, int y){
     title = t;
     author = a;
     year = y;
+    index = -1;
 }
 
 std::string Book::getTitle(){
@@ -33,6 +35,10 @@ int Book::getYear(){
     return year;
 }
 
+int Book::getIndex(){
+    return index;
+}
+
 void Book::setTitle(std::string x){
     title = x;
 }
@@ -43,6 +49,10 @@ void Book::setAuthor(std::string x){
 
 void Book::setYear(int x){
     year = x;
+}
+
+void Book::setIndex(int x){
+    index = x;
 }
 
 //friend of Book

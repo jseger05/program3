@@ -13,6 +13,8 @@
 class BinaryTree
 {
 	private:
+		int size;
+
 		struct TreeNode
 		{
 			Book value;         // The value in the node
@@ -29,6 +31,9 @@ class BinaryTree
 		void displayInOrder(TreeNode *) const;
 		void displayPreOrder(TreeNode *) const;
 		void displayPostOrder(TreeNode *) const;
+
+		//int getTreeSize();
+		//TreeNode* searchNodebyIndex(int num);
 
 	public:
 
@@ -51,5 +56,11 @@ class BinaryTree
 
 		void displayPostOrder() const
 		{  displayPostOrder(root); }
+
+		int getTreeSize(){
+			return size;
+		}
+		//TreeNode* searchNodebyIndex(int){}
+		TreeNode* searchNodebyIndex(int num);
 };
 #endif

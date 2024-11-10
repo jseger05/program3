@@ -25,6 +25,7 @@ class Book{
         std::string title;
         std::string author;
         int year;
+        int index;
     public:
         //Comparison option
         static CompareBy thing;
@@ -37,11 +38,13 @@ class Book{
         std::string getTitle();
         std::string getAuthor();
         int getYear();
+        int getIndex();
 
         //Setters
         void setTitle(std::string);
         void setAuthor(std::string);
         void setYear(int);
+        void setIndex(int);
 
         //Used for comparisons by author name
         std::string lastWord(std::string);

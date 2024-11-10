@@ -35,9 +35,11 @@ void BinaryTree::insertNode(Book const& num)
 
 void BinaryTree::insert(TreeNode *&nodePtr, TreeNode *&newNode)
 {
-   if (nodePtr == NULL)
-      nodePtr = newNode;                  // Insert the node.
-   else if (newNode->value < nodePtr->value)
+   if (nodePtr == NULL){
+      nodePtr = newNode;      // Insert the node.
+      size++;
+      nodePtr->value.setIndex(size); //set new size as the new index                  
+   }else if (newNode->value < nodePtr->value)
       insert(nodePtr->left, newNode);     // Search the left branch
    else 
       insert(nodePtr->right, newNode);    // Search the right branch
@@ -166,7 +168,7 @@ void BinaryTree::displayInOrder(TreeNode *nodePtr) const
 	  //cout << "\nLeft, nodePtr->left is " << nodePtr->left;
       displayInOrder(nodePtr->left);
 	  //cout << "\nNode";
-      cout << nodePtr->value << endl;
+      cout << nodePtr->value.getIndex() << ": " << nodePtr->value << endl;
 	  //cout << "\nRight, nodePtr->right is " << nodePtr->right;
       displayInOrder(nodePtr->right);
    }
@@ -200,4 +202,25 @@ void BinaryTree::displayPostOrder(TreeNode *nodePtr) const
       displayPostOrder(nodePtr->right);
       cout << nodePtr->value << endl;
    }
+}
+
+//Get size of tree function
+/*int BinaryTree::getTreeSize(){
+   return BinaryTree::size;
+}*/
+
+BinaryTree::TreeNode* BinaryTree::searchNodebyIndex(int num)
+{
+   TreeNode *nodePtr = root;
+
+   while (nodePtr)
+   {
+      if ((nodePtr->value).getIndex() == num)
+         return nodePtr;
+      else if (num < (nodePtr->value).getIndex())
+         nodePtr = nodePtr->left;
+      else
+         nodePtr = nodePtr->right;
+   }
+   return nodePtr;
 }
