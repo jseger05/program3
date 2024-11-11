@@ -7,7 +7,7 @@
 
 #include "Book.h"
 
-CompareBy Book::thing = CompareBy::YearFront; //default comparison
+CompareBy Book::thing = CompareBy::AuthorFront; //default comparison
 
 Book::Book(){
     title = "Title";
@@ -104,6 +104,7 @@ bool Book::operator==(Book& b){
 //If not, sort by whatever name is in list
 std::string Book::lastWord(std::string x){
     if (x.find(' ') != std::string::npos){
+        //std::cout << "\nLast word of " << x << " is " << x.substr(x.find(' ') + 1);
         return x.substr(x.find(' ') + 1);
     }
     return x;

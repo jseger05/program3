@@ -1,20 +1,20 @@
-A Tale of Two Cities; Charles Dickens; 1859
-The Little Prince; Antoine de Saint-Exupery; 1943
-The Alchemist; Paulo Coelho; 1988
-Harry Potter and the Philosopher's Stone; J.K. Rowling; 1997
-And Then There Were None; Agatha Christie; 1939
-Dream of the Red Chamber; Cao Xueqin; 1791
-The Hobbit; J.R.R. Tolkien; 1937
-Alice's Adventures in Wonderland; Lewis Carroll; 1865
-The Lion, the Witch and the Wardrobe; C.S. Lewis; 1950
-She: A History of Adventure; H. Rider Haggard; 1887
-The Da Vinci Code; Dan Brown; 2003
-Harry Potter and the Chamber of Secrets; J.K. Rowling; 1998
-The Catcher in the Rye; J.D. Salinger; 1951
-Harry Potter and the Prisoner of Azkaban; J.K. Rowling; 1999
-Harry Potter and the Goblet of Fire; J.K. Rowling; 2000
-Harry Potter and the Order of the Phoenix; J.K. Rowling; 2003
-Harry Potter and the Half-Blood Prince; J.K. Rowling; 2005
-Harry Potter and the Deathly Hallows; J.K. Rowling; 2007
-The Bridges of Madison County; Robert James Waller; 1992
-One Hundred Years of Solitude; Gabriel Garcia Marquez; 1967
+A Tale of Two Cities;Charles Dickens;1859
+The Little Prince;Antoine de Saint-Exupery;1943
+The Alchemist;Paulo Coelho;1988
+Harry Potter and the Philosopher's Stone;J.K. Rowling;1997
+And Then There Were None;Agatha Christie;1939
+Dream of the Red Chamber;Cao Xueqin;1791
+The Hobbit;J.R.R. Tolkien;1937
+Alice's Adventures in Wonderland;Lewis Carroll;1865
+The Lion, the Witch and the Wardrobe;C.S. Lewis;1950
+She: A History of Adventure;H. Rider Haggard;1887
+The Da Vinci Code;Dan Brown;2003
+Harry Potter and the Chamber of Secrets;J.K. Rowling;1998
+The Catcher in the Rye;J.D. Salinger;1951
+Harry Potter and the Prisoner of Azkaban;J.K. Rowling;1999
+Harry Potter and the Goblet of Fire;J.K. Rowling;2000
+Harry Potter and the Order of the Phoenix;J.K. Rowling;2003
+Harry Potter and the Half-Blood Prince;J.K. Rowling;2005
+Harry Potter and the Deathly Hallows;J.K. Rowling;2007
+The Bridges of Madison County;Robert James Waller;1992
+One Hundred Years of Solitude;Gabriel Garcia Marquez;1967
