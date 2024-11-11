@@ -35,10 +35,10 @@ class Book{
         Book(std::string, std::string, int);
 
         //Getters
-        std::string getTitle();
-        std::string getAuthor();
-        int getYear();
-        int getIndex();
+        std::string getTitle() const; //const so that const stuff in binaryTree can use the getters
+        std::string getAuthor() const;
+        int getYear() const;
+        int getIndex() const;
 
         //Setters
         void setTitle(std::string);

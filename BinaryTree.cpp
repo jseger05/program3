@@ -25,6 +25,13 @@ void BinaryTree::insertNode(Book const& num)
    
    // Insert the node.
    insert(root, newNode);
+
+   if(num.getTitle().length() > longestTitle){
+      longestTitle = num.getTitle().length();
+   }
+   if(num.getAuthor().length() > longestAuthor){
+      longestAuthor = num.getAuthor().length();
+   }
 }
 
 //*************************************************************
@@ -168,7 +175,7 @@ void BinaryTree::displayInOrder(TreeNode *nodePtr) const
 	  //cout << "\nLeft, nodePtr->left is " << nodePtr->left;
       displayInOrder(nodePtr->left);
 	  //cout << "\nNode";
-      cout << nodePtr->value.getIndex() << ": " << nodePtr->value << endl;
+      cout << nodePtr->value << endl;
 	  //cout << "\nRight, nodePtr->right is " << nodePtr->right;
       displayInOrder(nodePtr->right);
    }

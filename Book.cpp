@@ -7,7 +7,7 @@
 
 #include "Book.h"
 
-CompareBy Book::thing = CompareBy::AuthorFront; //default comparison
+CompareBy Book::thing = CompareBy::YearFront; //default comparison
 
 Book::Book(){
     title = "Title";
@@ -23,19 +23,19 @@ Book::Book(std::string t, std::string a, int y){
     index = -1;
 }
 
-std::string Book::getTitle(){
+std::string Book::getTitle() const{
     return title;
 }
 
-std::string Book::getAuthor(){
+std::string Book::getAuthor() const{
     return author;
 }
 
-int Book::getYear(){
+int Book::getYear() const{
     return year;
 }
 
-int Book::getIndex(){
+int Book::getIndex() const{
     return index;
 }
 
@@ -58,9 +58,13 @@ void Book::setIndex(int x){
 //friend of Book
 std::ostream& operator<<(std::ostream& out, Book const& c)
 {
-    out << c.title << " by " << c.author << " (" << c.year << ")";
+    if(c.index >= 10)
+        out << c.index << ": " << c.title << std::string(50-c.title.length(), ' ') << " by " << c.author << std::string(30-c.author.length(), ' ') << " (" << c.year << ")";
+    else
+        out << "0" << c.index << ": " << c.title << std::string(50-c.title.length(), ' ') << " by " << c.author << std::string(30-c.author.length(), ' ') << " (" << c.year << ")";
     return out;
 }
+//Max title space 50, max author space 30
 
 bool Book::operator<(Book& b){
     switch(thing){

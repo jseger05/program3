@@ -5,6 +5,7 @@
 */
 
 #include "BinaryTree.h"
+#include <fstream>
 
 void importFile(std::string, BinaryTree&); //imports books in order from file
 void exportFile(std::string, BinaryTree&); //saves books in new order to file
@@ -76,7 +77,19 @@ void inpVer(int& out, int lowerBound, int upperBound, std::string qText, std::st
 }
 
 void importFile(std::string inFile, BinaryTree& library){
-    std::cout << "1";
+    std::cout << "\nImporting from " << inFile << "... ";
+    std::ifstream InFile(inFile);
+    std::string tempString;
+    while(getline(InFile, tempString)){
+        std::string title = tempString.substr(0, tempString.find(';')); //grab the title
+        tempString.erase(0, tempString.find(';')+1); //erase the title
+
+        std::string author = tempString.substr(0, tempString.find(';')); //repeat for author
+        tempString.erase(0, tempString.find(';')+1);
+
+        library.insertNode(Book(title, author, stoi(tempString))); //what's left in tempString is the year
+    }
+    InFile.close();
 }
 void exportFile(std::string outFile, BinaryTree& library){
     std::cout << "2";

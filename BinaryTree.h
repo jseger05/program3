@@ -9,11 +9,12 @@
 #define BINARYTREE_H
 
 #include "Book.h"
+#include <iomanip>
 
 class BinaryTree
 {
 	private:
-		int size;
+		int size, longestTitle, longestAuthor = 0;
 
 		struct TreeNode
 		{
