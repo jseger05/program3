@@ -7,17 +7,19 @@
 #include "BinaryTree.h"
 #include <fstream>
 
-void importFile(std::string, BinaryTree&); //imports books in order from file
-void exportFile(std::string, BinaryTree&); //saves books in new order to file
+void importFile(std::string, BinaryTree*); //imports books in order from file
+void exportFile(std::string, BinaryTree*); //saves books in new order to file
 void inpVer(int& out, int lowerBound, int upperBound, std::string qText = "Enter choice:   ", std::string invText = "Input invalid.");
-void addBook(BinaryTree&);
+void addBook(BinaryTree*);
 //void editBook(BinaryTree&);
-void removeBook(BinaryTree&);
-void reSort(BinaryTree&);
+void removeBook(BinaryTree*);
+void reSort(BinaryTree*);
 
 int main(){
 
-    BinaryTree library;
+    Book::thing = CompareBy::AuthorFront;
+    BinaryTree* library = nullptr;
+    library = new BinaryTree;
     std::string inFilename = "bookData.txt";
     std::string outFilename = "outFile.txt";
     importFile(inFilename, library);
@@ -28,7 +30,11 @@ int main(){
     std::cout << "\n\nWelcome to your Library! (Now with BST!)";
     while(!done){
         std::cout << "\n\n";
-        library.displayInOrder();
+        (*library).displayInOrder();
+        std::cout << "\nTree depth is: " << (*library).getTreeDepth();
+
+        //Temp
+        (*library).printTreeNodes();
 
         std::cout << "\n\nWhat would you like to do?";
         std::cout << "\n\t1. Add book";
@@ -48,6 +54,7 @@ int main(){
     }
 
     std::cout << "\n\nGood-bye!";
+    delete library;    
 
     return 0;
 }
@@ -76,7 +83,7 @@ void inpVer(int& out, int lowerBound, int upperBound, std::string qText, std::st
     }while(!works);
 }
 
-void importFile(std::string inFile, BinaryTree& library){
+void importFile(std::string inFile, BinaryTree* library){
     std::cout << "\nImporting from " << inFile << "... ";
     std::ifstream InFile(inFile);
     std::string tempString;
@@ -87,14 +94,14 @@ void importFile(std::string inFile, BinaryTree& library){
         std::string author = tempString.substr(0, tempString.find(';')); //repeat for author
         tempString.erase(0, tempString.find(';')+1);
 
-        library.insertNode(Book(title, author, stoi(tempString))); //what's left in tempString is the year
+        (*library).insertNode(Book(title, author, stoi(tempString))); //what's left in tempString is the year
     }
     InFile.close();
 }
-void exportFile(std::string outFile, BinaryTree& library){
+void exportFile(std::string outFile, BinaryTree* library){
     std::cout << "2";
 }
-void addBook(BinaryTree& library){
+void addBook(BinaryTree* library){
     std::string title, author;
     int year;
     
@@ -107,7 +114,7 @@ void addBook(BinaryTree& library){
     std::cout << "\n\tWhen was the new book published? ";
     std::cin >> year;
 
-    library.insertNode(Book(title, author, year));
+    (*library).insertNode(Book(title, author, year));
 }
 /*void editBook(BinaryTree& library){
     std::string bookToEdit;
@@ -119,13 +126,33 @@ void addBook(BinaryTree& library){
     inpVer(attChoice, 1, 3);
 
 }*/
-void removeBook(BinaryTree& library){
-    std::string bookToRemove;
+void removeBook(BinaryTree* library){
     std::cout << "\nWhich book would you like to remove? (index)";
     int removeChoice;
-    inpVer(removeChoice, 1, library.getTreeSize());
-    library.remove((library.searchNodebyIndex(removeChoice))->value);
+    inpVer(removeChoice, 1, (*library).getTreeSize());
+    (*library).remove(((*library).searchNodebyIndex(removeChoice))->value);
 }
-void reSort(BinaryTree& library){
-    std::cout << "6";
+void reSort(BinaryTree* library){
+    std::cout << "\nRe-sort by...";
+    std::cout << "\n\t1. Title A-Z";
+    std::cout << "\n\t2. Title Z-A";
+    std::cout << "\n\t3. Author A-Z";
+    std::cout << "\n\t4. Author Z-A";
+    std::cout << "\n\t5. Year Lo-Hi";
+    std::cout << "\n\t6. Year Hi-Lo";
+    int sortchoice;
+    inpVer(sortchoice, 1, 6);
+    switch(sortchoice){ //changes sorting criteria to user selection
+        case 1: Book::thing = CompareBy::TitleFront; break;
+        case 2: Book::thing = CompareBy::TitleBack; break;
+        case 3: Book::thing = CompareBy::AuthorFront; break;
+        case 4: Book::thing = CompareBy::AuthorBack; break;
+        case 5: Book::thing = CompareBy::YearFront; break;
+        case 6: Book::thing = CompareBy::YearBack; break;
+        default: Book::thing = CompareBy::AuthorFront; break;
+    }
+    BinaryTree* library2 = nullptr;
+    (*library).createNewTree(library2);
+    delete library;
+    library = library2;
 }

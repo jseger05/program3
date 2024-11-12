@@ -24,7 +24,7 @@ void BinaryTree::insertNode(Book const& num)
    newNode->left = newNode->right = NULL;
    
    // Insert the node.
-   insert(root, newNode);
+   insert(root, newNode, 1);
 
    if(num.getTitle().length() > longestTitle){
       longestTitle = num.getTitle().length();
@@ -40,16 +40,21 @@ void BinaryTree::insertNode(Book const& num)
 // the TreeNode pointer. This function is called recursively. *
 //*************************************************************
 
-void BinaryTree::insert(TreeNode *&nodePtr, TreeNode *&newNode)
+void BinaryTree::insert(TreeNode *&nodePtr, TreeNode *&newNode, int thisDepth)
 {
+   if(thisDepth > depth){
+      depth = thisDepth;
+   }
+   //std::cout << "ThisDepth is " << thisDepth;
+
    if (nodePtr == NULL){
       nodePtr = newNode;      // Insert the node.
       size++;
       nodePtr->value.setIndex(size); //set new size as the new index                  
    }else if (newNode->value < nodePtr->value)
-      insert(nodePtr->left, newNode);     // Search the left branch
+      insert(nodePtr->left, newNode, (thisDepth+1));     // Search the left branch
    else 
-      insert(nodePtr->right, newNode);    // Search the right branch
+      insert(nodePtr->right, newNode, (thisDepth+1));    // Search the right branch
 }
 
 
@@ -220,14 +225,62 @@ BinaryTree::TreeNode* BinaryTree::searchNodebyIndex(int num)
 {
    TreeNode *nodePtr = root;
 
+   /*std::cout << "\nStarting search with index " << num;
    while (nodePtr)
    {
       if ((nodePtr->value).getIndex() == num)
-         return nodePtr;
+         {std::cout << "\nLocated index!"; return nodePtr; }
       else if (num < (nodePtr->value).getIndex())
-         nodePtr = nodePtr->left;
+         { std::cout << "\n" << num << " is less than current index " << (nodePtr->value).getIndex(); nodePtr = nodePtr->left;}
       else
-         nodePtr = nodePtr->right;
+         { std::cout << "\n" << num << " is greater than current index " << (nodePtr->value).getIndex(); nodePtr = nodePtr->right;}
    }
-   return nodePtr;
+   std::cout << "\nCould not locate index";
+   return nullptr;*/
+
+   return checkNodeIndex(nodePtr, num);
+}
+
+BinaryTree::TreeNode* BinaryTree::checkNodeIndex(BinaryTree::TreeNode* nodePtr, int num){
+   if(nodePtr){
+      if(nodePtr->value.getIndex() == num){
+         return nodePtr; //found the index
+      }
+      TreeNode* nodePtr2 = checkNodeIndex(nodePtr->left, num);
+      if(nodePtr2){ //if it's not null...
+         return nodePtr2; //We found it, so return that
+      }
+      TreeNode* nodePtr3 = checkNodeIndex(nodePtr->right, num);
+      if(nodePtr3){ //if it's not null...
+         return nodePtr3; //We found it, so return that
+      }
+   }
+   return nullptr; //if we get here, we didn't find it
+}
+
+void BinaryTree::printTreeNodes(TreeNode *nodePtr) const{
+   if (nodePtr)
+   {
+      cout << "\n" << nodePtr->value.getIndex() << " links to: "; 
+      if(nodePtr->left)
+         cout << nodePtr->left->value.getIndex(); 
+      if(nodePtr->right)
+         cout << " and " << nodePtr->right->value.getIndex();
+      printTreeNodes(nodePtr->left);
+      printTreeNodes(nodePtr->right);
+   }
+}
+
+void BinaryTree::createNewTree(BinaryTree* newTree){   
+   newTree = new BinaryTree;
+   addNode(newTree, root);
+}
+
+void BinaryTree::addNode(BinaryTree* newTree, BinaryTree::TreeNode* nodePtr){
+   if (nodePtr)
+   {
+      addNode(newTree, nodePtr->left);
+      (*newTree).insertNode(nodePtr->value);
+      addNode(newTree, nodePtr->right);
+   }
 }
