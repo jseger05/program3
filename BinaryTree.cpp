@@ -116,12 +116,15 @@ void BinaryTree::remove(Book& num)
 
 void BinaryTree::deleteNode(Book& num, TreeNode *&nodePtr)
 {
-   if (num < nodePtr->value)
+   if (num < nodePtr->value){
+      //std::cout << "\n" << num << " is less than " << nodePtr->value;
       deleteNode(num, nodePtr->left);
-   else if (num > nodePtr->value)
+   }else if (num > nodePtr->value){
+      //std::cout << "\n" << num << " is greater than " << nodePtr->value;
       deleteNode(num, nodePtr->right);
-   else
-      makeDeletion(nodePtr);
+   }else{
+      //std::cout << "\nMaking deletion on " << nodePtr->value;
+      makeDeletion(nodePtr);}
 }
 
 
@@ -143,12 +146,14 @@ void BinaryTree::makeDeletion(TreeNode *&nodePtr)
    {
       tempNodePtr = nodePtr;
       nodePtr = nodePtr->left;   // Reattach the left child
+      std::cout << "\nDeleted " << tempNodePtr->value;
       delete tempNodePtr;
    }
    else if (nodePtr->left == NULL)
    {
       tempNodePtr = nodePtr;
       nodePtr = nodePtr->right;  // Reattach the right child
+      std::cout << "\nDeleted " << tempNodePtr->value;
       delete tempNodePtr;
    }
    // If the node has two children.
@@ -164,6 +169,7 @@ void BinaryTree::makeDeletion(TreeNode *&nodePtr)
       tempNodePtr = nodePtr;
       // Reattach the right subtree.
       nodePtr = nodePtr->right;
+      std::cout << "\nDeleted " << tempNodePtr->value;
       delete tempNodePtr;
    }
 }
@@ -216,31 +222,25 @@ void BinaryTree::displayPostOrder(TreeNode *nodePtr) const
    }
 }
 
+
+//NEW STUFF BELOW
+
+
 //Get size of tree function
 /*int BinaryTree::getTreeSize(){
    return BinaryTree::size;
 }*/
+//This only works until you remove a node because of the way "size" tracking works. (ie only changes +1 when added so that new nodes don't have index conflicts)
 
+//Get the node* associated with a given index (handler function)
 BinaryTree::TreeNode* BinaryTree::searchNodebyIndex(int num)
 {
    TreeNode *nodePtr = root;
-
-   /*std::cout << "\nStarting search with index " << num;
-   while (nodePtr)
-   {
-      if ((nodePtr->value).getIndex() == num)
-         {std::cout << "\nLocated index!"; return nodePtr; }
-      else if (num < (nodePtr->value).getIndex())
-         { std::cout << "\n" << num << " is less than current index " << (nodePtr->value).getIndex(); nodePtr = nodePtr->left;}
-      else
-         { std::cout << "\n" << num << " is greater than current index " << (nodePtr->value).getIndex(); nodePtr = nodePtr->right;}
-   }
-   std::cout << "\nCould not locate index";
-   return nullptr;*/
-
    return checkNodeIndex(nodePtr, num);
 }
+//could have implemented this in the .h, I guess
 
+//Check index on a specific node for searchNodeByIndex (recursive)
 BinaryTree::TreeNode* BinaryTree::checkNodeIndex(BinaryTree::TreeNode* nodePtr, int num){
    if(nodePtr){
       if(nodePtr->value.getIndex() == num){
@@ -258,6 +258,7 @@ BinaryTree::TreeNode* BinaryTree::checkNodeIndex(BinaryTree::TreeNode* nodePtr, 
    return nullptr; //if we get here, we didn't find it
 }
 
+//For debug purposes, prints out a tree "map". Pre order so that it starts at the root
 void BinaryTree::printTreeNodes(TreeNode *nodePtr) const{
    if (nodePtr)
    {
@@ -271,16 +272,17 @@ void BinaryTree::printTreeNodes(TreeNode *nodePtr) const{
    }
 }
 
-void BinaryTree::createNewTree(BinaryTree* newTree){   
-   newTree = new BinaryTree;
-   addNode(newTree, root);
-}
-
-void BinaryTree::addNode(BinaryTree* newTree, BinaryTree::TreeNode* nodePtr){
+//Like displayInOrder, but this one returns the tree as a delimited string so it can save to file
+std::string BinaryTree::returnInOrder(TreeNode *nodePtr) const
+{
+   std::string strSum = "";
    if (nodePtr)
    {
-      addNode(newTree, nodePtr->left);
-      (*newTree).insertNode(nodePtr->value);
-      addNode(newTree, nodePtr->right);
+      strSum += returnInOrder(nodePtr->left);
+      strSum += (nodePtr->value).getTitle(); strSum += ";"; 
+      strSum += (nodePtr->value).getAuthor(); strSum += ";";
+      strSum += to_string((nodePtr->value).getYear()); strSum += "\n";
+      strSum += returnInOrder(nodePtr->right);
    }
+   return strSum;
 }

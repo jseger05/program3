@@ -81,7 +81,7 @@ bool Book::operator>(Book& b){
     switch(thing){
         case CompareBy::TitleFront: return (b.getTitle() > title); break;
         case CompareBy::TitleBack: return (b.getTitle() < title); break;
-        case CompareBy::AuthorFront: return (b.lastWord(b.getAuthor()) > b.lastWord(author)); break; //swapping signs to make it sort A - Z
+        case CompareBy::AuthorFront: return (b.lastWord(b.getAuthor()) < b.lastWord(author)); break; //swapping signs to make it sort A - Z
         case CompareBy::AuthorBack: return (b.lastWord(b.getAuthor()) < b.lastWord(author)); break;
         case CompareBy::YearFront: return (b.getYear() > year); break;
         case CompareBy::YearBack: return (b.getYear() < year); break;
@@ -103,9 +103,9 @@ bool Book::operator==(Book& b){
 //If Author has firstname, sort by lastname
 //If not, sort by whatever name is in list
 std::string Book::lastWord(std::string x){
-    if (x.find(' ') != std::string::npos){
-        //std::cout << "\nLast word of " << x << " is " << x.substr(x.find(' ') + 1);
-        return x.substr(x.find(' ') + 1);
+    if (x.find_last_of(' ') != std::string::npos){
+        //std::cout << "\nLast word of " << x << " is " << x.substr(x.find_last_of(' ') + 1);
+        return x.substr(x.find_last_of(' ') + 1);
     }
     return x;
 }

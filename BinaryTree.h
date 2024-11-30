@@ -34,10 +34,8 @@ class BinaryTree
 		void displayPostOrder(TreeNode *) const;
 		void printTreeNodes(TreeNode*) const;
 
-		//int getTreeSize();
-		//TreeNode* searchNodebyIndex(int num);
 		TreeNode* checkNodeIndex(TreeNode*, int);
-		void addNode(BinaryTree*, TreeNode*);
+		std::string returnInOrder(TreeNode *) const;
 
 	public:
 
@@ -61,17 +59,22 @@ class BinaryTree
 		void displayPostOrder() const
 		{  displayPostOrder(root); }
 
-		int getTreeSize(){
+		//New stuff
+
+		int getTreeSize(){ //not accurate
 			return size;
 		}
 		int getTreeDepth(){
 			return depth;
 		}
-		//TreeNode* searchNodebyIndex(int){}
+
 		TreeNode* searchNodebyIndex(int num);
+
 		void printTreeNodes(){
 			printTreeNodes(root);
 		}
-		void createNewTree(BinaryTree*);
+
+		std::string returnInOrder() const
+		{  return returnInOrder(root); }
 };
 #endif
